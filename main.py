@@ -16,8 +16,10 @@ def main():
 if __name__ == "__main__":
     main()
 
+#mashas epic algorithm
 def greedy_algorithm(griddy):
 
+#
 def get_random_cell(griddy):
     for 
 
