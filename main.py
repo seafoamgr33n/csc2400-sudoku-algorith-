@@ -1,4 +1,4 @@
-import sudokugrid
+from sudokugrid import sudoku
 
 #file with actual algorithms
 
@@ -11,7 +11,13 @@ import sudokugrid
 #TODO: maybe difficulty controls?
 
 def main():
-    print("hi!")
+    grid_greedy = sudoku() #mashas sudoku
 
 if __name__ == "__main__":
     main()
+
+def greedy_algorithm(griddy):
+
+def get_random_cell(griddy):
+    for 
+

@@ -4,6 +4,7 @@
 #https://www.geeksforgeeks.org/python/python-matrix/ was used for reference.
 
 #TODO create checks for valid cells
+    # create check for 3x3 subcells
 #TODO create print function
 
 class sudoku: 
