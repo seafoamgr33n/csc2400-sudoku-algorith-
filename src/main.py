@@ -16,10 +16,17 @@ def main():
 if __name__ == "__main__":
     main()
 
-#mashas epic algorithm
+# mashas epic algorithm
+# For example, if it is determined that a cell can contain a 1,
+# then the algorithm will stop there, fill the cell with a 1, and 
+# move to the next cell to be filled. 
+# otherwise, backtrack. question: how will we backtrack? stack of dicts? 
+# we can also check if a cell has been touched before with the stack
+# the power of science
 def greedy_algorithm(griddy):
+    
 
-#
+
 def get_random_cell(griddy):
     for 
 
