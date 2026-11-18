@@ -1,0 +1,22 @@
+psuedocode
+
+class SudokuBoard
+    make the sudoku grid
+
+    get row
+
+    get column
+
+    set value
+
+    print grid
+
+    validate position
+        validate rows, columns, and box
+
+    brute force/solve grid
+        find all original empty positions
+        use itertools to create ~every~ possible combination for the puzzle
+        validate
+        reset board if validation shows it is incorrect
+        loop it till it works
