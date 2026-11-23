@@ -1,22 +1,36 @@
-psuedocode
+psuedocode:
+brute force algorithm
+
+global variables
 
 class SudokuBoard
-    make the sudoku grid
+    make the sudoku board (1 dimensional list)
+
+    set value
 
     get row
 
     get column
 
-    set value
+    get box
 
-    print grid
+    print board
+
+    set empty cells
+
+    initialize board
+
+    reset cell
+
+    add one
 
     validate position
         validate rows, columns, and box
 
+    increment board
+        calls reset cell and add one
+
     brute force/solve grid
         find all original empty positions
-        use itertools to create ~every~ possible combination for the puzzle
-        validate
-        reset board if validation shows it is incorrect
-        loop it till it works
+        initialize the board
+        while the current board is not valid, increment the board
