@@ -1,0 +1,58 @@
+### Python Psuedocode for Genetic Algorithms ###
+
+BEGIN
+
+    SET population_size = 300
+    SET max_generations = 5000
+    SET mutation_rate = 0.30
+    SET max_restarts = 10
+    SET best_boards = 10
+
+    // Step 1: Get Sudoku puzzle from user
+    INPUT a 9x9 Sudoku puzzle
+    USE 0 for empty cells
+
+    VALIDATE puzzle for duplicate numbers or invalid puzzle
+
+    // Step 2: Generate initial population
+    CREATE random Sudoku grids
+    PRESERVE prefilled numbers
+    RANDOMLY fill empty cells so each row contains 1–9
+
+    FOR each restart FROM 1 TO max_restarts:
+
+        FOR each generation FROM 1 TO max_generations:
+
+            // Step 3: Evaluate fitness
+            CALCULATE fitness based on duplicate numbers in columns and 3x3 boxes
+
+            GOAL: Fitness = 0
+
+            // Step 4: Check for solution
+            IF fitness = 0:
+                RETURN completed Sudoku grid
+
+            // Step 5: Selection
+            SELECT parent grids using selection
+
+            // Step 6: Crossover
+            CREATE children by combining rows from two parents
+
+            // Step 7: Mutation
+            RANDOMLY swap two numbers in an eligible row
+
+            // Step 8: Create next generation
+            KEEP the best 10 grids 
+            FILL the remaining population with new children
+
+        END FOR
+
+        // Step 9: Random restart
+        IF no solution is found:
+            CREATE a new random population
+
+    END FOR
+
+    RETURN no solution found
+
+END
