@@ -14,23 +14,29 @@ def greedySudoku(grid, xi, yi):
     if x == 9 and y == 8:
         return "advance" # base case for when we are done
 
+    print(grid.grid)
+
     # take care of occupied squares if we're inputting data
-    while grid[xi][yi] != 0:
+    while grid.grid[x][y] != 0:
         x = x + 1
         if x == 9:
             y += 1
             x = 0
 
+    if x == 9:
+        y += 1
+        x = 0
+
     for num in range (1, 10):
         # iterate through possibilities, take the first that works.
         # use the recursive stack to store stuff. 
         # if something is safe, we advance. 
-        if grid.is_valid_all:
-            grid[x][y] = num
-            if greedySudoku(grid, x, y+1) == "advance":
+        if grid.is_valid_all(num, x, y):
+            grid.grid[x][y] = num
+            if greedySudoku(grid, x + 1, y) == "advance":
                 return "advance"
             # if NOTHING works we have to reset
-            grid[x][y] = 0 
+            grid.grid[x][y] = 0 
 
 
         return "backtrack"
@@ -42,4 +48,5 @@ def main():
     greedySudoku(grid, 0,0)
     print(grid)
 
-
+if __name__ == "__main__":
+    main()

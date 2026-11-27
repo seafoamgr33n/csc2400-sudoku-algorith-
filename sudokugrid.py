@@ -73,9 +73,9 @@ class sudoku:
 
     def is_valid_all(self, num, x, y): # mash them all together 
         subgrid = self.is_valid_subgrid(num, x, y)  # just test them all
-        po = self.is_valid_colmn(num, x, y)         # whatever
-        asfdasdf = self.is_valid_row(num, x, y)
-        if subgrid == True and po == True and asfdasdf == True:
+        check2 = self.is_valid_column(num, x, y)         # whatever
+        check3 = self.is_valid_row(num, x, y)
+        if subgrid == True and check2 == True and check3 == True:
             return True
         
 
