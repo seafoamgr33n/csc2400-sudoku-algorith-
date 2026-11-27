@@ -3,6 +3,7 @@
 import math
 
 #I test it on a 4x4 grid bc the 9x9 is too big
+#aka a 9x9 will take longer than the universe has been alive
 EDGE_LENGTH= 4 #4 or 9
 BOX_LENGTH= 2 #2 or 3
 BOARD_SIZE = 16 #16 or 81
@@ -11,9 +12,9 @@ empty_cells = []
 
 class SudokuBoard:
     def __init__(self):
-        #make the sudoku grid
-        #self.board = [0]*BOARD_SIZE
-        self.board = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        #make the sudoku board
+        self.board = [0]*BOARD_SIZE
+        #self.board = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         self.counter = 0
         #perfect board
         #self.board = [1,2,3,4,3,4,1,2,2,1,4,3,4,3,2,1]
