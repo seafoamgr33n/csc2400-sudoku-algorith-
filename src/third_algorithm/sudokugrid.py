@@ -22,14 +22,19 @@ class sudoku:
                     [0, 0, 0, 0, 0, 0, 0, 0, 0,]]
         #i think it would be fun if we could make a way to format it lol
 
+    def printgrid(self):
+        for x in range(9): # n,jkgnmhvh,nv
+            print(f"{self.grid[x][0]} {self.grid[x][1]} {self.grid[x][2]} {self.grid[x][3]} {self.grid[x][4]} {self.grid[x][5]} {self.grid[x][6]} {self.grid[x][7]} {self.grid[x][8]}")
+        print("-----------------")
+
     #tell us if a choice at a certain loc is valid.
     #that is, if there isn't an identical number on that row. 
     def is_valid_row(self, num, posx, posy):
 
         #for that row...
-        for x in range(10):
+        for x in range(9):
             #check every item in the grid
-            if self.grid[x][posy] == num:
+            if self.grid[posx][x] == num:
                 #if there's a match it's not valid.
                 return False
 
@@ -41,9 +46,9 @@ class sudoku:
     #we'll see
     def is_valid_column(self, num, posx, posy): 
         #for that column...
-        for x in range(10):
+        for x in range(9):
             #check every item in the column
-            if self.grid[posx][posy] == num:
+            if self.grid[x][posy] == num:
                 #if there's a match it's not valid.
                 return False
 

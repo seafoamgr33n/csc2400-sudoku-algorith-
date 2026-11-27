@@ -7,6 +7,7 @@ def greedySudoku(grid, xi, yi):
     # probably use recursion because i thought of storing
     # nums and coords in a stack but then i was like what am i doing
     # it should stop at the last cell, bottom right, after iterating through row cells
+    # x is like if you flipped the matrix its left side. literally counting rows
     
     x = xi
     y = yi
@@ -14,7 +15,10 @@ def greedySudoku(grid, xi, yi):
     if x == 9 and y == 8:
         return "advance" # base case for when we are done
 
-    print(grid.grid)
+    if x == 9:
+        y += 1
+        x = 0
+
 
     # take care of occupied squares if we're inputting data
     while grid.grid[x][y] != 0:
@@ -23,9 +27,6 @@ def greedySudoku(grid, xi, yi):
             y += 1
             x = 0
 
-    if x == 9:
-        y += 1
-        x = 0
 
     for num in range (1, 10):
         # iterate through possibilities, take the first that works.
@@ -39,14 +40,15 @@ def greedySudoku(grid, xi, yi):
             grid.grid[x][y] = 0 
 
 
-        return "backtrack"
+    return "backtrack"
+
 
     
 
 def main():
     grid = sudoku()
     greedySudoku(grid, 0,0)
-    print(grid)
+    grid.printgrid()
 
 if __name__ == "__main__":
     main()
