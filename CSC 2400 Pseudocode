@@ -2,6 +2,8 @@
 
 BEGIN
 
+    START runtime timer
+
     SET population_size = 300
     SET max_generations = 5000
     SET mutation_rate = 0.30
@@ -54,5 +56,8 @@ BEGIN
     END FOR
 
     RETURN no solution found
+
+    STOP runtime timer
+    CALCULATE and DISPLAY total runtime
 
 END

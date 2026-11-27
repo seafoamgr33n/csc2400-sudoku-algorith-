@@ -1,5 +1,6 @@
 import random
 import copy
+import time
 
 # -------------------------------
 # ALGORITHM SETUP
@@ -333,17 +334,19 @@ def solve_sudoku(puzzle):
 # MAIN FUNCTION
 # -------------------------------
 
+
 def main():
+    start_time = time.time()
 
     puzzle = get_puzzle()
 
     try:
-
         validate_puzzle(puzzle)
-
     except ValueError as error:
-
         print("\nInvalid Sudoku puzzle:", error)
+
+        end_time = time.time()
+        print(f"Total Runtime: {end_time - start_time:.2f} seconds")
         return
 
     print("\nStarting Sudoku Genetic Algorithm...\n")
@@ -351,13 +354,15 @@ def main():
     solution = solve_sudoku(puzzle)
 
     if solution is not None:
-
         print("\nCompleted Sudoku Board:")
         display_board(solution)
-
     else:
-
         print("\nUnable to find a solution.")
+
+    end_time = time.time()
+    runtime = end_time - start_time
+
+    print(f"\nTotal Runtime: {runtime:.2f} seconds")
 
 
 if __name__ == "__main__":
