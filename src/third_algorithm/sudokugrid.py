@@ -3,23 +3,27 @@
 #subject to changeeeee
 #https://www.geeksforgeeks.org/python/python-matrix/ was used for reference.
 
-#TODO create checks for valid cells
-    # create check for 3x3 subcells
-#TODO create print function
+import json
 
 class sudoku: 
 
-    def __init__(self):
+    def __init__(self, filepath):
         #initialize an empty grid
-        self.grid = [[0, 0, 0, 0, 0, 0, 0, 0, 0,],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0,],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0,],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0,],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0,],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0,],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0,],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0,],
-                    [0, 0, 0, 0, 0, 0, 0, 0, 0,]]
+        if filepath == 1:
+            self.grid = [[0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0,],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0,]]
+        else: 
+            with open(filepath, 'r') as file: # load a puzzel!!!!!!!!!!!!!!!!!!!!!
+                data = json.load(file)
+                self.grid = data["puzzle"]
+        
         #i think it would be fun if we could make a way to format it lol
 
     def printgrid(self):
@@ -82,6 +86,20 @@ class sudoku:
         check3 = self.is_valid_row(num, x, y)
         if subgrid == True and check2 == True and check3 == True:
             return True
+
+    def find_open(self):
+        # find the next thingy that is a 0 
+        # so we can go in order, filling out a new puzzle
+        # or a semi-filled puzzle. 
+
+        # loop through everything
+        for row in range(9):
+            for col in range(9):
+                if self.grid[row][col] == 0:
+                    return row, col
+
+        return "end", "end" # if we're at the base case. 
+
         
 
 
