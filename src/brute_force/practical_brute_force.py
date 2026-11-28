@@ -1,24 +1,21 @@
 #brute force
 #each cell is in object in the board object's list
 
-import random
-import json
+import random       ###for randomly generating a puzzle
+import json         ###for loading in a puzzle
 
 class Board:
     def __init__(self, my_list):
         self.list = my_list
-        self.counter = 0
-        self.zero_counter = 0
-        self.tried_sols_index = 0
         self.empty_cells = []
 class Cell:
     def __init__(self, row, col, box, num, my_id):
         self.row = row
         self.col = col
-        self.box = box
+        self.box = box #3x3
         self.num = num
         self.id = my_id
-        self.tried_sols = []
+        self.tried_sols = [] #tried solutions
 
 def init_board():
     #init col row box
@@ -26,6 +23,11 @@ def init_board():
     r = 0
     b = 0
     id_counter = 0
+
+    #with open("sudoku.json", "r") as file:  ###for loading in a puzzle
+    #    data = json.load(file)              ###
+    #    puzzle = data["puzzle"]             ###
+
     for i in range(81):
         if c == 9:
             r += 1
@@ -49,16 +51,15 @@ def init_board():
                 b=7
             case (d,e) if 6<=d<=8 and 6<=e<=8:
                 b=8
-        with open("sudoku.json","r") as file:           ###for loading in a sudoku puzzle
-            data = json.load(file)                      ###
-            puzzle = data["puzzle"]                     ###
-        cell = Cell(r, c, b, puzzle[r][c], id_counter)  ###
 
-        #cell = Cell(r, c, b, 0,id_counter) ### for generating a random puzzle
+        #cell = Cell(r, c, b, puzzle[r][c], id_counter)  ### for loading in a puzzle
 
-        c += 1
+        cell = Cell(r, c, b, 0,id_counter) ### for randomly generating a puzzle
+
+        c += 1  #have these increment after cell is created but still inside the loop
         id_counter += 1
-        board.list.append(cell)
+
+        board.list.append(cell) #create cell
 
 def set_empty_cells():
     for i in range(81):
@@ -66,12 +67,12 @@ def set_empty_cells():
             board.empty_cells.append(i)
 
 def print_board():
-    print()
     for r in range(81):
         if r%9==0 and r!=0:
             print()
         print(board.list[r].num, end=", ")
-    print()
+    print("\n")
+
 
 def is_valid(index,number):
     for i in range(81):
@@ -108,6 +109,9 @@ def backtracking(zero_index):
     new_index=0
     if zero_index >= 1:
         new_index = zero_index-1
+    else:
+        print("error: index is -1")
+        exit(0)
     old_num = board.list[new_index].num  # 1 good
     if old_num not in board.list[new_index].tried_sols:
         board.list[new_index].tried_sols.append(old_num)
@@ -130,10 +134,7 @@ def backtracking(zero_index):
                     board.list[new_index].num = i
                     break
                 else:
-                    #clear tried sols, set value to 0, and backtrack
-                    board.list[new_index].tried_sols.clear()
-                    board.list[new_index].num = 0
-                    backtracking(new_index)
+                    continue
             else:
                 #if it is tried, add to tried sols
                 if i not in board.list[new_index].tried_sols:
@@ -141,28 +142,54 @@ def backtracking(zero_index):
                 #if length of tried sols is 9, clear tried sols, set value to 0, and backtrack
                 if len(board.list[new_index].tried_sols) == 9:
                     board.list[new_index].tried_sols.clear()
+                    board.list[new_index].num = 0
                     backtracking(new_index)
+    if board.list[new_index].num == 0:
+        # clear tried sols and backtrack
+        board.list[new_index].tried_sols.clear()
+        backtracking(zero_index) #new_index = leaves 0s, zero_index= ???
+        #brute_force() #buffered/stuck
+
 
     return new_index
 
 
 def brute_force():
 
-    #rand = list(range(1,10))                 ### if generating random board
-    #random.shuffle(rand)                     ###
-    #print(rand)                              ###
-    #for i in range(9):                       ###
-    #    if i in empty_cells:                 ###
-    #        board.list[i].num = rand[i]      ###
-    #i = 9                                    ###
+    #check if IMPORTED board is valid
+    for i in range(81):
+        #if it is not 0
+        if i not in board.empty_cells:
+            #store the value
+            value = board.list[i].num
+            #set value to 0
+            board.list[i].num = 0
+            #check to see if the stored value is valid
+            valid = is_valid(i, value)
+            if valid:
+                board.list[i].num = value
+                continue
+            else:
+                print()
+                print("Board imported is not valid- error in spot:", i)
+                exit(0)
 
-    i = 0         ### if importing board
+    rand = list(range(1,10))                 ### for randomly generating a puzzle
+    random.shuffle(rand)                     ###
+    for i in range(9):                       ###
+        if i in board.empty_cells:           ###
+            board.list[i].num = rand[i]      ###
+
+
+    i = 9                                    ###
+    #i = 0         ### for loading in a puzzle
     while i<81:
         #if cell is empty, iterate numbers till one works
         if i in board.empty_cells:
             for number in range(1,10):
                 if is_valid(i,number):
                     board.list[i].num = number
+                    #print_board()
                     i+=1
                     break
                 else:
@@ -174,9 +201,13 @@ def brute_force():
         else:
             i+=1
             continue
-
-    if board.list[80].num != 0:
-        print_board()
+    for i in range(81):
+        if board.list[i].num != 0:
+            continue
+    print()
+    print("Completed Board:")
+    print_board()
+    exit(0)
 
 if __name__ == '__main__':
     board = Board([])

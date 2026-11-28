@@ -9,7 +9,6 @@ BOX_LENGTH= 2 #2 or 3
 BOARD_SIZE = 16 #16 or 81
 empty_cells = []
 
-
 class SudokuBoard:
     def __init__(self):
         #make the sudoku board
@@ -29,7 +28,6 @@ class SudokuBoard:
             row.append(self.board[spot_to_check])
             spot_to_check += 1
         return row
-
 
     def get_column(self,col_index):
         col=[]
@@ -52,15 +50,12 @@ class SudokuBoard:
 
         position = box_start
 
-        #TODO
-        #
         for i in range(BOX_LENGTH):
             for j in range(BOX_LENGTH):
                 box.append(self.board[position])
                 position += 1
             position = box_start + ((i+1) * (BOX_LENGTH**2))
         return box
-
 
     def print_board(self):
         for i in range(EDGE_LENGTH):
@@ -114,6 +109,7 @@ class SudokuBoard:
     def increment_board(self):
         for i in range(BOARD_SIZE):
             if i in empty_cells:
+                self.print_board()
                 if self.board[i] == EDGE_LENGTH:
                     self.reset_cell(i)
                     continue
@@ -133,13 +129,9 @@ class SudokuBoard:
         while not self.is_valid():
             self.increment_board()
 
-
     def main(self):
         self.brute_force()
-
-
 
 if __name__ == '__main__':
     board = SudokuBoard()
     board.main()
-

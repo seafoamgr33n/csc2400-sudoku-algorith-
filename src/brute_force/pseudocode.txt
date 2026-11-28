@@ -1,0 +1,137 @@
+
+practical brute force pseudocode:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+import random and json
+
+class board
+    vars including:
+    list, the list that holds all the cell objects
+    empty cells, the list that holds all the empty cells
+
+class cell
+    vars including:
+    row, col, box(3x3), num, id, and tried solutions
+
+def init board
+    loop that creates all cells and sets row, col, box and id
+    if generating random puzzle:
+        value = 0
+    if loading in a puzzle from json file:
+        value = json file value at [r][c]
+
+def set empty cells
+    if cell is empty originally, add to list empty cells
+
+def print board
+    print the board
+
+def is valid
+    before the number is placed in a cell, it checks
+    if that number exists in the row, col, and box
+
+    if the number is 0 it is not valid
+
+    returns true or false
+
+def backtracking
+    at the index where there is a 0 because no number is valid,
+    go back one cell and add its value to tried sols.
+
+    then if the cell was originally an empty cell, (aka not a set value
+    imported from json) check to see if a value 1-9 has already been tried and
+    if it hasn't AND it is a valid value, add it to that spot
+
+    else
+    add to tried sols. if tried sols is full, clear the list, set the value
+    to 0, and backtrack again
+
+    returns the new index (value to the left of the 0 index)
+
+def brute force
+    validating that the imported board is valid
+
+    if generating random puzzle:
+        get random array with numbers 1-9, set row 0 to that
+        set i to 9 (first spot row 1)
+
+    else loading json file:
+        set i to 0
+
+    while i < 81
+    if the cell is empty iterate numbers until one is valid
+    if it has tried all numbers and is still not valid, call backtracking
+
+    if all cells are full, print complete board and print board
+
+main
+    create board object
+    init board
+    set empty cells
+    brute force
+
+pure brute force pseudocode:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+9x9 WILL TAKE EONS TO RUN
+4x4 takes about 25 min
+
+import math (for floor function)
+
+global variables including:
+edge length = 4 or 9
+box length = 2 or 3
+board size = 16 or 81
+empty cells
+
+class SudokuBoard
+    make the sudoku board (1 dimensional list)
+    set counter to 0
+
+    def set value
+        sets the value at a specific index
+
+    def get row
+        returns row of index
+
+    def get column
+        returns col of index
+
+    def get box
+        returns box of index
+
+    def print board
+        prints board
+
+    def set empty cells
+        if cell is empty originally, add to list empty cells
+
+    def init board
+        set all cell values to 1
+
+    def reset cell
+        sets value of cell to 1
+
+    def add one
+        adds one to the cells value
+        has a counter that prints every 10,000 attempts
+
+    def is valid
+        validate rows, columns, and box
+        returns true or false
+
+    def increment board
+        if the cell is originally empty, increment it by 1 and when its full add one
+        to the next available space like a 16 or 81 digit number
+
+    def brute force
+        find all original empty positions
+        initialize the board
+        while the current board is not valid, increment board
+
+    def main
+        idk why i even have this
+        run brute force
+
+main
+    create board object
+    call main
