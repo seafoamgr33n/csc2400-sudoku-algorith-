@@ -86,6 +86,7 @@ class sudoku:
         check3 = self.is_valid_row(num, x, y)
         if subgrid == True and check2 == True and check3 == True:
             return True
+        return False
 
     def find_open(self):
         # find the next thingy that is a 0 
@@ -99,6 +100,15 @@ class sudoku:
                     return row, col
 
         return "end", "end" # if we're at the base case. 
+
+    def test_quality(self): 
+        for x in range(9):        # for every cell
+            for y in range(9):    # test if the puzzle is valid
+                numb = self.grid[x][y]
+                if self.is_valid_all(self, numb, x, y) == False:
+                    return "this is not a valid puzzle."
+
+        return "this is a valid puzzle."
 
         
 
