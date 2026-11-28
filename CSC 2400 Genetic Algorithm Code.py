@@ -1,6 +1,7 @@
 import random
 import copy
 import time
+import json
 
 # -------------------------------
 # ALGORITHM SETUP
@@ -17,28 +18,39 @@ BEST_BOARD_COUNT = 10
 # -------------------------------
 
 def get_puzzle():
+    print("How would you like to enter your Sudoku puzzle?")
+    print("1. Load puzzle from JSON file")
+    print("2. Enter puzzle manually")
 
-    print("Enter your Sudoku puzzle.")
-    print("Use 0 for empty cells.")
-    print("Enter each row as 9 digits (example: 123456789)\n")
+    choice = input("Choose 1 or 2: ")
 
-    puzzle = []
+    if choice == "1":
+        with open("sudoku.json", "r") as file:
+            data = json.load(file)
 
-    for row in range(9):
+        puzzle = data["puzzle"]
 
-        while True:
+    elif choice == "2":
+        print("\nEnter your Sudoku puzzle.")
+        print("Use 0 for empty cells.")
+        print("Enter each row as 9 digits (example: 530070000)\n")
 
-            numbers = input(f"Enter row {row + 1}: ")
+        puzzle = []
 
-            if len(numbers) == 9 and numbers.isdigit():
+        for row in range(9):
+            while True:
+                numbers = input(f"Enter row {row + 1}: ")
 
-                new_row = [int(num) for num in numbers]
+                if len(numbers) == 9 and numbers.isdigit():
+                    new_row = [int(num) for num in numbers]
+                    puzzle.append(new_row)
+                    break
 
-                puzzle.append(new_row)
+                print("Invalid input. Please enter exactly 9 digits.")
 
-                break
-
-            print("Invalid input. Please enter exactly 9 digits.")
+    else:
+        print("Invalid choice. Please choose 1 or 2.")
+        return get_puzzle()
 
     return puzzle
 

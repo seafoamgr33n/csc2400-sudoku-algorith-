@@ -10,7 +10,14 @@ BEGIN
     SET max_restarts = 10
     SET best_boards = 10
 
-    // Step 1: Get Sudoku puzzle from user
+    // Step 1: Get Sudoku puzzle
+    ASK user how they want to enter the puzzle
+
+    IF user chooses JSON:
+    READ sudoku.json file
+    LOAD the Sudoku puzzle from the JSON file
+
+    ELSE IF user chooses manual input:
     INPUT a 9x9 Sudoku puzzle
     USE 0 for empty cells
 
