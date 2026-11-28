@@ -109,12 +109,12 @@ class SudokuBoard:
     def increment_board(self):
         for i in range(BOARD_SIZE):
             if i in empty_cells:
-                self.print_board()
                 if self.board[i] == EDGE_LENGTH:
                     self.reset_cell(i)
                     continue
                 else:
                     self.add_one(i)
+                    self.print_board()
                     break
         return True
 
